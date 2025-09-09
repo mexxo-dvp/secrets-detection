@@ -1,5 +1,5 @@
 [UA](#ua) | [EN](#en)
-
+<a id="ua"></a>
 # Gitleaks Pre-Commit (Go) {#ua}
 
 Легкий pre-commit хук на Go, який автоматично запускає **gitleaks** перед комітом і блокує потрапляння секретів у репозиторій. Працює крос‑платформенно, уміє **автовстановлювати gitleaks** залежно від ОС, має перемикач через `git config`, і містить правило, наприклад для **Telegram Bot Token**. Файл правил **не містить реальних секретів** — лише патерни (regex).
@@ -55,7 +55,8 @@ git commit -m "test: add demo token"  # очікуємо блокування
     │ ○
     ○ ░
     ░    gitleaks
-
+```
+```text
 11:18AM INF 0 commits scanned.
 11:18AM INF scan completed in 51.7ms
 11:24AM WRN leaks found: 1
@@ -115,7 +116,7 @@ jobs:
 MIT
 
 ---
-
+<a id="en"></a>
 # Gitleaks Pre-Commit (Go) {#en}
 
 A lightweight Go pre-commit hook that runs **gitleaks** before each commit to block secrets from entering your repository. Cross‑platform, **auto‑installs gitleaks** per OS, toggleable via `git config`, for example, let's take **Telegram bot token** rule. The rules file stores **no real secrets**—only regex patterns.
@@ -171,7 +172,8 @@ git commit -m "test: add demo token"  # expected block
     │ ○
     ○ ░
     ░    gitleaks
-
+```
+```text
 11:18AM INF 0 commits scanned.
 11:18AM INF scan completed in 51.7ms
 11:24AM WRN leaks found: 1

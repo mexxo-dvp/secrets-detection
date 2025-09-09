@@ -6,15 +6,23 @@ on:
     branches: ["main"]
 permissions:
   contents: read
+
 jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup gitleaks
+
+      - name: Install gitleaks
+        shell: bash
         run: |
-          curl -sSfL https://raw.githubusercontent.com/gitleaks/gitleaks/master/install.sh | sh -s -- -b ./
-          echo "$PWD" >> $GITHUB_PATH
+          set -euxo pipefail
+          curl -sSfL https://raw.githubusercontent.com/gitleaks/gitleaks/master/install_gitleaks.sh \
+            | sh -s -- -b ./bin
+          ./bin/gitleaks version
+
       - name: Run gitleaks
+        shell: bash
         run: |
-          ./gitleaks detect --redact --exit-code 1 --config tools/gitleaks/config.toml
+          set -euxo pipefail
+          ./bin/gitleaks detect --redact --exit-code 1 --config tools/gitleaks/config.toml

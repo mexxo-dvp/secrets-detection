@@ -48,7 +48,7 @@ echo 'FAKE-TELEGRAM-TOKEN' > demo.env
 git add demo.env
 git commit -m "test: add demo token"  # очікуємо блокування
 ### Приклад виводу (успішний коміт без секретів)
-
+```
 ```
     ○
     │╲
@@ -56,7 +56,7 @@ git commit -m "test: add demo token"  # очікуємо блокування
     ○ ░
     ░    gitleaks
 ```
-```text
+```
 11:18AM INF 0 commits scanned.
 11:18AM INF scan completed in 51.7ms
 11:24AM WRN leaks found: 1
@@ -66,6 +66,7 @@ git commit -m "test: add demo token"  # очікуємо блокування
 ---
 
 # прибирання
+```bash
 git restore --staged demo.env && rm -f demo.env
 ```
 
@@ -97,18 +98,18 @@ on:
     branches: ["main"]
 permissions:
   contents: read
+
 jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup gitleaks
-        run: |
-          curl -sSfL https://raw.githubusercontent.com/gitleaks/gitleaks/master/install.sh | sh -s -- -b ./
-          echo "$PWD" >> $GITHUB_PATH
-      - name: Run gitleaks
-        run: |
-          ./gitleaks detect --redact --exit-code 1 --config tools/gitleaks/config.toml
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_CONFIG: tools/gitleaks/config.toml
 ```
 
 ## Ліцензія
@@ -117,6 +118,7 @@ MIT
 
 ---
 <a id="en"></a>
+[UA](#ua) | [EN](#en)
 # Gitleaks Pre-Commit (Go) {#en}
 
 A lightweight Go pre-commit hook that runs **gitleaks** before each commit to block secrets from entering your repository. Cross‑platform, **auto‑installs gitleaks** per OS, toggleable via `git config`, for example, let's take **Telegram bot token** rule. The rules file stores **no real secrets**—only regex patterns.
@@ -162,7 +164,7 @@ git commit --allow-empty -m "chore: smoke pre-commit (no secrets)"
 echo 'FAKE-TELEGRAM-TOKEN' > demo.env
 git add demo.env
 git commit -m "test: add demo token"  # expected block
-
+```
 
 ### Sample output (no secrets)
 
@@ -173,7 +175,7 @@ git commit -m "test: add demo token"  # expected block
     ○ ░
     ░    gitleaks
 ```
-```text
+```
 11:18AM INF 0 commits scanned.
 11:18AM INF scan completed in 51.7ms
 11:24AM WRN leaks found: 1
@@ -181,6 +183,7 @@ git commit -m "test: add demo token"  # expected block
 ```
 
 # cleanup
+```bash
 git restore --staged demo.env && rm -f demo.env
 ```
 

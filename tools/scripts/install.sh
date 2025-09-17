@@ -91,4 +91,6 @@ echo "[OK] pre-commit hook -> $HOOK_FILE"
 echo
 echo "Try (no token printed to console/history):"
 echo "  bash -c 'TOKEN=\$(LC_ALL=C tr -dc \"A-Za-z0-9_-\" </dev/urandom | head -c 35); \\"
+echo "  printf \"TELEGRAM_BOT_TOKEN=1234567890:%s\\n\" \"\$TOKEN\" > demo.env'"
 echo "  git add demo.env && git commit -m \"test: demo token\"  # commit should fail"
+

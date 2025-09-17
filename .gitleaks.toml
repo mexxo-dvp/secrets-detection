@@ -1,0 +1,9 @@
+title = "Local rules"
+
+[[rules]]
+id = "telegram-bot-token"
+description = "Telegram Bot Token"
+# Example token shape: 1234567890:AAAAAAAAAAAAAAAAAAAAAAAAAAA111
+regex = '''(?i)(\b\d{9,10}:[A-Za-z0-9_-]{35}\b)'''
+tags = ["token","telegram","secret"]
+entropy = 0.0

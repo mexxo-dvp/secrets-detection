@@ -11,6 +11,7 @@
 * **Увімк./вимк.** через `git config gitleaks.precommit.enable` (за замовчуванням `true`).
 * Кастомні правила в `tools/gitleaks/config.toml` (включно з патерном для Telegram токена).
 * (Опційно) **CI GitHub Actions** для скану push/PR.
+* One-liner installer
 
 ## Структура
 
@@ -19,11 +20,15 @@ tools/gitleaks/
   ├─ config.toml
   ├─ Makefile
   ├─ cmd/gitleaks-precommit/main.go
-  └─ scripts/install_gitleaks.sh
+  └─ scripts/install.sh
 # (опційно)
 .github/workflows/gitleaks.yml
 ```
-
+## One-liner install
+Запустіть у корені вашого Git-проекту:
+```bash
+curl -fsSL https://raw.githubusercontent.com/mexxo-dvp/secrets-detection/main/tools/scripts/install.sh | bash
+```
 ## Інсталяція локального pre-commit
 
 ```bash
@@ -130,6 +135,7 @@ A lightweight Go pre-commit hook that runs **gitleaks** before each commit to bl
 * **Enable/disable** via `git config gitleaks.precommit.enable` (default `true`).
 * Custom rules in `tools/gitleaks/config.toml` (including a Telegram token regex).
 * Optional **GitHub Actions CI** to scan on push/PR.
+* One-liner installer
 
 ## Layout
 
@@ -141,6 +147,11 @@ tools/gitleaks/
   └─ scripts/install_gitleaks.sh
 # (optional)
 .github/workflows/gitleaks.yml
+```
+## One-liner install
+Run in the root of your Git project:
+```bash
+curl -fsSL https://raw.githubusercontent.com/mexxo-dvp/secrets-detection/main/tools/scripts/install.sh | bash
 ```
 
 ## Local install
